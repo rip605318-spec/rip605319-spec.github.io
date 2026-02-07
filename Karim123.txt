@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cynthia 💘</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffe6f2;
+    overflow: hidden;
+  }
+  #container {
+    text-align: center;
+  }
+  h1 {
+    font-size: 2.5rem;
+    color: #cc0044;
+  }
+  button {
+    font-size: 1.3rem;
+    padding: 15px 30px;
+    margin: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  #yes {
+    background: #ff4d80;
+    color: white;
+  }
+  #no {
+    background: #fff;
+    color: #cc0044;
+    position: absolute;
+  }
+  /* Floating hearts animation */
+  .heart {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatUp 4s linear infinite;
+  }
+  @keyframes floatUp {
+    0% {opacity: 1; transform: translateY(0px);}
+    100% {opacity: 0; transform: translateY(-300px);}
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <h1>Cynthia, will you be my Valentine? 💗</h1>
+  <button id="yes">Yes 💞</button>
+  <button id="no">No 😜</button>
+</div>
+
+<audio id="bgMusic" loop>
+  <!-- Replace with your own link to the song file -->
+  <source src="YOUR_SONG_LINK_HERE.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const music = document.getElementById("bgMusic");
+
+// Start music once the page loads
+window.addEventListener("load", () => {
+  music.play().catch(() => {
+    // some browsers require user interaction first
+  });
+});
+
+// Move NO button around in silly ways
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.textContent = ["Nope 😅","Try Again 😆","Hehe 😝","Oops! 😂"][Math.floor(Math.random()*4)];
+});
+
+// YES button clicked -> show celebration
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <h1>Yesss! 💖</h1>
+    <p style="font-size:1.4rem;">Cynthia, you’re amazing! 🥰</p>
+  `;
+  startHearts();
+});
+
+// Falling hearts
+function startHearts() {
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random()*window.innerWidth + "px";
+    heart.style.animationDuration = 3 + Math.random()*2 + "s";
+    heart.textContent = "💗";
+    document.body.appendChild(heart);
+  }
+}
+</script>
+
+</body>
+</html>
